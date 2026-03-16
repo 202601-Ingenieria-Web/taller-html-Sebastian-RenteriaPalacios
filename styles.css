@@ -1,0 +1,38 @@
+h1{
+    color: #000000;
+    text-align: center;
+}
+h2{
+    color: #1e1ec0;
+    text-align: center;
+
+}
+h3{
+    color: #1e1ec0;
+    text-align: left;
+}
+p{
+    color: #000000;
+    text-align: left;
+}
+
+body{
+    background-image: url('/poke_bg.webp');
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.contenido {
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 20px;
+  border-radius: 10px;
+  width: fit-content;
+  text-align: center;
+}
+
+#poke-info {
+  text-align: left;
+  list-style: none;
+}

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>PokeAPI</title>
+</head>
+<body>
+    <div class="contenido">
+        <div >
+            <h1>Bienvenido a PokeAPI</h1>
+            <p>Esta es una página HTML simple para demostrar el uso de la PokeAPI.</p>
+        </div>
+        <div>
+            <h2>Información de los Pokémon</h2>
+            <p>Aquí puedes encontrar información sobre los Pokémon utilizando la PokeAPI.</p>
+
+        </div>
+        <div>
+            <label for="poke">
+                Buscar Pokémon:
+                <input type="text" name="name" id="poke" placeholder="ditto">
+                <button onclick="fetchPokemon()">Ingresar</button>
+            </label>
+        </div>
+        <div id="poke-info">
+            
+        </div>
+    </div>
+
+</body>
+<script>
+  function fetchPokemon() {
+    const pokemonName = document.getElementById('poke').value.toLowerCase();
+    const url = `https://pokeapi.co/api/v2/pokemon/${pokemonName}`;
+
+    let pokemonData;
+
+    fetch(url)
+      .then((response) => {
+        if (!response.ok) throw new Error('Pokemon no encontrado');
+        return response.json();
+      })
+      .then((data) => {
+        pokemonData = data;
+        return fetch(data.species.url);
+      })
+      .then((response) => {
+        if (!response.ok) throw new Error('No se pudo obtener la especie');
+        return response.json();
+      })
+      .then((speciesData) => {
+        document.getElementById('poke-info').innerHTML = `
+          <img src="${pokemonData.sprites.front_default}" alt="${pokemonData.name}">
+          <p>Nombre: ${pokemonData.name}</p>
+          <p>ID: ${pokemonData.id}</p>
+          <p>Tipo: ${pokemonData.types.map(type => type.type.name).join(', ')}</p>
+          <p>Peso: ${pokemonData.weight}</p>
+          <p>Altura: ${pokemonData.height}</p>
+          <h3>Estadísticas:</h3>
+          <p>${pokemonData.stats.map(stat => `<li>${stat.stat.name}: ${stat.base_stat}</li>`).join('')}</p>
+        `;
+      })
+      .catch(() => {
+        alert('Pokemon no encontrado');
+      });
+  }
+</script>
+</html>
+
