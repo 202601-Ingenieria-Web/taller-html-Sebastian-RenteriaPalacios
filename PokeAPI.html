@@ -35,22 +35,12 @@
     const pokemonName = document.getElementById('poke').value.toLowerCase();
     const url = `https://pokeapi.co/api/v2/pokemon/${pokemonName}`;
 
-    let pokemonData;
-
     fetch(url)
       .then((response) => {
         if (!response.ok) throw new Error('Pokemon no encontrado');
         return response.json();
       })
-      .then((data) => {
-        pokemonData = data;
-        return fetch(data.species.url);
-      })
-      .then((response) => {
-        if (!response.ok) throw new Error('No se pudo obtener la especie');
-        return response.json();
-      })
-      .then((speciesData) => {
+      .then((pokemonData) => {
         document.getElementById('poke-info').innerHTML = `
           <img src="${pokemonData.sprites.front_default}" alt="${pokemonData.name}">
           <p>Nombre: ${pokemonData.name}</p>
