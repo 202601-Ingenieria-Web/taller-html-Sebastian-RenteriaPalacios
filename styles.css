@@ -24,6 +24,7 @@ body{
     min-height: 100vh;
 }
 
+/* Tarjeta semitransparente para mejorar legibilidad sobre el fondo. */
 .contenido {
   background-color: rgba(255, 255, 255, 0.8);
   padding: 20px;
