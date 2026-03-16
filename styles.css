@@ -17,7 +17,7 @@ p{
 }
 
 body{
-    background-image: url('/poke_bg.webp');
+    background-image: url('./poke_bg.webp');
     display: flex;
     justify-content: center;
     align-items: center;

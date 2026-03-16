@@ -32,7 +32,6 @@
 </body>
 <script>
   function fetchPokemon() {
-
     const pokemonName = document.getElementById('poke').value.toLowerCase();
     const url = `https://pokeapi.co/api/v2/pokemon/${pokemonName}`;
 
@@ -45,7 +44,6 @@
       })
       .then((data) => {
         pokemonData = data;
-        // Se consulta tambien el endpoint de especie para extender la informacion disponible.
         return fetch(data.species.url);
       })
       .then((response) => {
